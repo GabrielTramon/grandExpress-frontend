@@ -1,58 +1,122 @@
+"use client";
+
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function BoxCompany() {
+  const companies = [
+    {
+      name: "Gourmet Fuel",
+      logo: "/gf-logo.png",
+      url: "https://gourmetfuel.com/?srsltid=AfmBOoovnHLmxce8PRdcsscGZf5l77V41JeGKsyvHbB_zoYPuGGXejzT",
+    },
+    {
+      name: "Hopeless Botanics",
+      logo: "/hopeless-logo.png",
+      url: "https://hopelessbotanics.ie",
+    },
+    {
+      name: "ABM BBQ",
+      logo: "/abbq-logo.png",
+      url: "https://abmbbq.nl",
+    },
+    {
+      name: "Eat Up",
+      logo: "/eatUpLogo.jpg",
+      url: "https://www.instagram.com/eatupmeals_",
+    },
+    {
+      name: "Just Fit",
+      logo: "/justFitLogo.png",
+      url: "https://justfitnutrition.eu",
+    },
+  ];
+
   return (
-    <section className="mt-12 px-4">
-      {/* TÍTULO CENTRALIZADO */}
-      <h1 className="text-4xl font-bold text-gray-800 mb-12 text-center">Corporate partners</h1>
+    <section className="mt-8 md:mt-12 px-4 md:px-6 max-w-7xl mx-auto">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 text-center slide-left-to-right">
+        Corporate partners
+      </h1>
 
-      <div className="flex flex-wrap justify-center gap-10">
-        {/* Box 1 */}
-        <a
-          href="https://gourmetfuel.com/?srsltid=AfmBOoovnHLmxce8PRdcsscGZf5l77V41JeGKsyvHbB_zoYPuGGXejzT"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-md border-2 border-gray-300 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 hover:text-orange-600 w-72">
-            <Image alt="Gourmet Fuel Logo" src="/gf-logo.png" width={180} height={100} />
-            <h3 className="text-2xl font-semibold mt-5 text-center">Gourmet Fuel</h3>
-          </div>
-        </a>
+      {/* Versão mobile */}
+      <div className="flex flex-col gap-4 items-center md:hidden">
+        {companies.map((c) => (
+          <a
+            key={c.name}
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full max-w-xs"
+          >
+            <div className="flex flex-col items-center bg-white p-3 rounded-xl shadow-sm border border-gray-200 cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-md hover:border-orange-300">
+              <div className="relative h-16 w-32">
+                <Image
+                  alt={c.name}
+                  src={c.logo}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-lg font-semibold mt-3 text-center text-gray-700">
+                {c.name}
+              </h3>
+            </div>
+          </a>
+        ))}
+      </div>
 
-        {/* Box 2 */}
-        <a
-          href="https://hopelessbotanics.ie"
-          target="_blank"
-          rel="noopener noreferrer"
+      {/* Versão desktop com Swiper */}
+      <div className="hidden md:block py-2">
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          slidesPerView={1}
+          spaceBetween={10}
+          loop={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 28,
+            },
+            1280: {
+              slidesPerView: 5,
+              spaceBetween: 32,
+            },
+          }}
+          className="px-2"
         >
-          <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-md border-2 border-gray-300 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 hover:text-orange-600 w-72">
-            <Image alt="Hopeless Botanics Logo" src="/hopeless-logo.png" width={180} height={100} />
-            <h3 className="text-2xl font-semibold mt-5 text-center">Hopeless Botanics</h3>
-          </div>
-        </a>
-
-        {/* Box 3 */}
-        <a
-          href="https://abmbbq.nl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-md border-2 border-gray-300 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 hover:text-orange-600 w-72">
-            <Image alt="ABM BBQ Logo" src="/abbq-logo.png" width={180}height={100} />
-            <h3 className="text-2xl font-semibold mt-5 text-center">ABM BBQ</h3>
-          </div>
-        </a>
-
-                <a
-          href="https://www.instagram.com/eatupmeals_"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-md border-2 border-gray-300 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 hover:text-orange-600 w-72">
-            <Image alt="eatUp" src="/eatUpLogo.jpg" width={182}height={100} />
-            <h3 className="text-2xl font-semibold mt-5 text-center">Eat Up</h3>
-          </div>
-        </a>
+          {companies.map((c) => (
+            <SwiperSlide key={c.name} className="py-2">
+              <a href={c.url} target="_blank" rel="noopener noreferrer">
+                <div className="flex flex-col items-center justify-center bg-white p-4 rounded-xl shadow-sm border border-gray-200 cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] hover:shadow-md hover:border-orange-300 h-40 mx-auto max-w-[200px]">
+                  <div className="relative h-20 w-full mb-3 fade-in">
+                    <Image
+                      alt={c.name}
+                      src={c.logo}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <h3 className="text-base font-semibold text-center text-gray-700 line-clamp-2">
+                    {c.name}
+                  </h3>
+                </div>
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

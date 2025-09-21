@@ -1,8 +1,40 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { Mail, MessageCircle } from "lucide-react";
 
 export default function ContactComponent() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // anima só uma vez
+          }
+        });
+      },
+      { threshold: 0.2 } // 20% visível para disparar
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, []);
+
   return (
-    <section id="contact" className="w-full py-16 px-4">
+    <section
+      id="contact"
+      ref={ref}
+      className={`w-full py-16 px-4 slide-bottom-to-top ${isVisible ? "active" : ""}`}
+    >
       <div className="max-w-xl mx-auto bg-white p-10 rounded-2xl shadow-2xl text-center border-2 border-gray-200">
         <h1 className="text-4xl font-bold text-gray-800 mb-6">Get in Touch</h1>
         <p className="text-gray-600 text-lg mb-8">
@@ -34,4 +66,3 @@ export default function ContactComponent() {
     </section>
   );
 }
-  

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function Location(){
     return(
-           <section id="" className="w-full bg-zinc-50 py-16 px-6 md:px-12mt mt-12">
+           <section id="" className="w-full bg-zinc-50 py-16 px-6 md:px-12mt mt-12 slide-left-to-right">
               <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
                   <Image

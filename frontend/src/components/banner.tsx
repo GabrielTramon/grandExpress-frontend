@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="flex justify-center mt-10 px-4">
+    <div className="flex justify-center pt-[15vh] px-4 fade-in">
       <div className="w-full max-w-[1300px]">
         {/* Banner para desktop */}
         <div className="hidden md:block">
@@ -17,7 +17,7 @@ export default function Banner() {
         </div>
 
         {/* Banner para mobile */}
-        <div className="block md:hidden">
+        <div className="block md:hidden ">
           <Image
             src="/bannerMobile.png"
             alt="Banner Mobile"
