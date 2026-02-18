@@ -34,6 +34,16 @@ export default function BoxCompany() {
       logo: "/justFitLogo.png",
       url: "https://justfitnutrition.eu",
     },
+    {
+      name: "BAH 33º",
+      logo: "/bah33.png",
+      url: "https://bah33.ie/",
+    },
+    {
+      name: "Olivia's food",
+      logo: "/oliviaFood.png",
+      url: "https://www.oliviasfood.com/",
+    },
   ];
 
   return (
@@ -42,7 +52,6 @@ export default function BoxCompany() {
         Corporate partners
       </h1>
 
-      {/* Versão mobile */}
       <div className="flex flex-col gap-4 items-center md:hidden">
         {companies.map((c) => (
           <a
@@ -69,13 +78,12 @@ export default function BoxCompany() {
         ))}
       </div>
 
-      {/* Versão desktop com Swiper */}
       <div className="hidden md:block py-2">
         <Swiper
           modules={[Navigation]}
           navigation
           slidesPerView={1}
-          spaceBetween={10}
+          spaceBetween={2}
           loop={true}
           breakpoints={{
             640: {
@@ -83,16 +91,14 @@ export default function BoxCompany() {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 24,
             },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 28,
+              slidesPerView: 2,
             },
             1280: {
-              slidesPerView: 5,
-              spaceBetween: 32,
+              slidesPerView: 4,
             },
           }}
           className="px-2"
